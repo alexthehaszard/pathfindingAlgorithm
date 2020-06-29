@@ -1,0 +1,43 @@
+#gridBox {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.gridItem {
+    width: 10px;
+    height: 10px;
+    border: black 1px solid;
+}
+
+@keyframes searched {
+    from {
+        background-color: white;
+    }
+
+    50% {
+        background-color: #C6E2E9;
+    }
+
+    to {
+        background-color: #A7BED3;
+    }
+}
+
+@keyframes final-path {
+    from {
+        background-color: #A7BED3;
+    }
+
+    50% {
+        background-color: #F1FFC4;
+    }
+
+    to {
+        background-color: #FFCAAF;
+    }
+}
