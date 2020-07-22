@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <script defer src="index.js"></script>
+    <script src="dijkstras.js"></script>
+    <script src="astar.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<head>
-  <script defer src="index.js"></script>
-  <script src="dijkstras.js"></script>
-  <script src="astar.js"></script>
-  <link rel="stylesheet" href="index.css" />
-</head>
-
-<body id="body">
-  <button onclick="dijkstras(startItem[0], startItem[1])">find path</button>
-  <button onclick="reset()">reset</button>
-  <div id="gridBox"></div>
-</body>
-
+  <body id="body">
+    <div id="setup">
+      <button class="mg5" onclick="dijkstras(startItem[0], startItem[1])">
+        find path using Dijkstras Algorithm
+      </button>
+      <button class="mg5" onclick="aStar(startItem[0], startItem[1])">
+        find path using A* Algorithm
+      </button>
+      <button class="mg5" onclick="randomize()">
+        create random walls
+      </button>
+      <button class="mg5" onclick="reset()">reset</button>
+      <div class="break"></div>
+      <p>Click to place walls and move the start and finish lines.</p>
+    </div>
+    <div id="gridBox"></div>
+  </body>
 </html>

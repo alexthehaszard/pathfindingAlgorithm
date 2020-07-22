@@ -41,7 +41,9 @@ function dijkstras(x, y) {
     isSolvable = true;
     return;
   } else {
-    setTimeout(function () { dijkstras(minUnvisited[0], minUnvisited[1]) }, 1);
+    setTimeout(function () {
+      dijkstras(minUnvisited[0], minUnvisited[1]);
+    }, 1);
     // search(minUnvisited[0], minUnvisited[1]);
   }
 }

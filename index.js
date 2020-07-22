@@ -1,15 +1,17 @@
-const COLS = 100;
-const ROWS = 64;
-const WIDTH = 10;
+const COLS = 50;
+const ROWS = 30;
+const WIDTH = 20;
 
 let startItem = [5, 5];
-let endItem = [5, 15];
+let endItem = [24, 44];
+let prevVisited = startItem;
 
 let grid = [];
 let visited = [];
 let distance = [];
 let dir = [];
 let seen = [];
+let tempVisited = [];
 
 let movingStart = false;
 let movingEnd = false;
@@ -18,7 +20,7 @@ let removing = false;
 
 setup();
 
-function setup(reset) {
+function setup() {
   document.getElementById("gridBox").innerHTML = "";
   for (let i = 0; i < ROWS; i++) {
     grid[i] = [];
@@ -33,19 +35,32 @@ function setup(reset) {
       seen[i][j] = false;
       grid[i].push(document.createElement("div"));
       grid[i][j].classList = "gridItem";
-      if (reset === true) {
-        grid[i][j].style = "background-color: white";
-      }
-      grid[i][j].setAttribute("onclick", `if (visited[${i}][${j}] === true && drawing === false) removing = true; else if (drawing === true) drawing = false; else drawing = true; moveNode(${i}, ${j})`);
+      grid[i][
+        j
+      ].style = `background-color: white; height: ${WIDTH}px; width: ${WIDTH}px`;
+      grid[i][j].setAttribute(
+        "onclick",
+        `if (visited[${i}][${j}] === true && drawing === false) removing = true; else if (drawing === true) drawing = false; else drawing = true; moveNode(${i}, ${j})`
+      );
       grid[i][j].setAttribute("onmouseover", `moveNode(${i}, ${j})`);
       if (i === startItem[0] && j === startItem[1]) {
-        grid[i][j].style = "background-color: #41658A";
+        grid[i][
+          j
+        ].style = `background-color: #41658A; height: ${WIDTH}px; width: ${WIDTH}px`;
         distance[i][j] = 0;
-        grid[i][j].setAttribute("onclick", `if(movingStart === true) movingStart = false; else movingStart = true`);
+        grid[i][j].setAttribute(
+          "onclick",
+          `if(movingStart === true) movingStart = false; else movingStart = true`
+        );
         grid[i][j].setAttribute("onmouseover", "");
       } else if (i === endItem[0] && j === endItem[1]) {
-        grid[i][j].style = "background-color: #FA8334";
-        grid[i][j].setAttribute("onclick", `if(movingEnd === true) movingEnd = false; else movingEnd = true`);
+        grid[i][
+          j
+        ].style = `background-color: #FA8334; height: ${WIDTH}px; width: ${WIDTH}px`;
+        grid[i][j].setAttribute(
+          "onclick",
+          `if(movingEnd === true) movingEnd = false; else movingEnd = true`
+        );
         grid[i][j].setAttribute("onmouseover", "");
       }
       document.getElementById("gridBox").appendChild(grid[i][j]);
@@ -57,30 +72,45 @@ function setup(reset) {
 }
 
 function changeColour(i, j, color, animation) {
-  grid[i][j].style = `animation: ${animation} 500ms ease; background-color: ${color}`;
+  grid[i][
+    j
+  ].style = `animation: ${animation} 500ms ease; background-color: ${color}; height: ${WIDTH}px; width: ${WIDTH}px`;
 }
 
 function followPath(x, y) {
   if (x === startItem[0] && y === startItem[1]) return;
+  if (x - 1 === startItem[0] && y === startItem[1]) return;
+  if (x + 1 === startItem[0] && y === startItem[1]) return;
+  if (x === startItem[0] && y + 1 === startItem[1]) return;
+  if (x === startItem[0] && y - 1 === startItem[1]) return;
+
   if (dir[x][y] === "d") {
     if (x + 1 === startItem[0] && y === startItem[1]) return;
     changeColour(x + 1, y, "#FFCAAF", "final-path");
-    setTimeout(function () { followPath(x + 1, y) }, 10);
+    setTimeout(function () {
+      followPath(x + 1, y);
+    }, 10);
   }
   if (dir[x][y] === "u") {
     if (x - 1 === startItem[0] && y === startItem[1]) return;
     changeColour(x - 1, y, "#FFCAAF", "final-path");
-    setTimeout(function () { followPath(x - 1, y) }, 10);
+    setTimeout(function () {
+      followPath(x - 1, y);
+    }, 10);
   }
   if (dir[x][y] === "r") {
     if (x === startItem[0] && y - 1 === startItem[1]) return;
     changeColour(x, y - 1, "#FFCAAF", "final-path");
-    setTimeout(function () { followPath(x, y - 1) }, 10);
+    setTimeout(function () {
+      followPath(x, y - 1);
+    }, 10);
   }
   if (dir[x][y] === "l") {
     if (x === startItem[0] && y + 1 === startItem[1]) return;
     changeColour(x, y + 1, "#FFCAAF", "final-path");
-    setTimeout(function () { followPath(x, y + 1) }, 10);
+    setTimeout(function () {
+      followPath(x, y + 1);
+    }, 10);
   }
 }
 
@@ -94,20 +124,32 @@ function moveNode(x, y) {
     setup();
   }
   if (drawing === true) {
-    changeColour(x, y, 'blue');
+    changeColour(x, y, "blue");
     visited[x][y] = true;
   }
   if (removing === true) {
-    changeColour(x, y, 'white');
+    changeColour(x, y, "white");
     visited[x][y] = false;
     removing = false;
   }
 }
 
 function reset() {
-  grid = [];
-  visited = [];
-  distance = [];
-  dir = [];
-  setup(reset);
+  setup();
+}
+
+function randomize() {
+  reset();
+  for (let i = 0; i < ROWS; i++) {
+    for (let j = 0; j < COLS; j++) {
+      if (Math.random() < 0.25) {
+        if (i === startItem[0] && j === startItem[1]) {
+        } else if (i === endItem[0] && j === endItem[1]) {
+        } else {
+          visited[i][j] = true;
+          changeColour(i, j, "blue");
+        }
+      }
+    }
+  }
 }
