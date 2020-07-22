@@ -69,7 +69,13 @@ function aStar(x, y) {
     }
   }
   if (diagonal === true) {
-    if (y + 1 !== 0 && y + 1 < COLS && visited[x + 1][y + 1] === false) {
+    if (
+      y + 1 !== 0 &&
+      y + 1 < COLS &&
+      x + 1 !== 0 &&
+      x + 1 < ROWS &&
+      visited[x + 1][y + 1] === false
+    ) {
       if (
         (seen[x + 1][y + 1] === true &&
           distance[x + 1][y + 1] > distance[x][y] + 1.5) ||
@@ -80,7 +86,13 @@ function aStar(x, y) {
         dir[x + 1][y + 1] = "dr";
       }
     }
-    if (y + 1 !== 0 && y + 1 < COLS && visited[x + 1][y - 1] === false) {
+    if (
+      y - 1 !== -1 &&
+      y - 1 < COLS &&
+      x + 1 !== 0 &&
+      x + 1 < ROWS &&
+      visited[x + 1][y - 1] === false
+    ) {
       if (
         (seen[x + 1][y - 1] === true &&
           distance[x + 1][y - 1] > distance[x][y] + 1.5) ||
@@ -91,7 +103,13 @@ function aStar(x, y) {
         dir[x + 1][y - 1] = "ur";
       }
     }
-    if (y + 1 !== 0 && y + 1 < COLS && visited[x - 1][y + 1] === false) {
+    if (
+      y + 1 !== 0 &&
+      y + 1 < COLS &&
+      x - 1 !== -1 &&
+      x - 1 < ROWS &&
+      visited[x - 1][y + 1] === false
+    ) {
       if (
         (seen[x - 1][y + 1] === true &&
           distance[x - 1][y + 1] > distance[x][y] + 1.5) ||
@@ -102,7 +120,13 @@ function aStar(x, y) {
         dir[x - 1][y + 1] = "dl";
       }
     }
-    if (y + 1 !== 0 && y + 1 < COLS && visited[x - 1][y - 1] === false) {
+    if (
+      y - 1 !== -1 &&
+      y - 1 < COLS &&
+      x - 1 !== -1 &&
+      x - 1 < ROWS &&
+      visited[x - 1][y - 1] === false
+    ) {
       if (
         (seen[x - 1][y - 1] === true &&
           distance[x - 1][y - 1] > distance[x][y] + 1.5) ||
