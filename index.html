@@ -19,6 +19,12 @@
         create random walls
       </button>
       <button class="mg5" onclick="reset()">reset</button>
+      <input
+        type="checkbox"
+        name="diag"
+        onclick="if (diagonal) diagonal = false; else diagonal = true;"
+      />
+      <label for="diag">Diagonals (only works for a*)</label>
       <div class="break"></div>
       <p>Click to place walls and move the start and finish lines.</p>
     </div>

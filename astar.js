@@ -68,6 +68,52 @@ function aStar(x, y) {
       dir[x][y + 1] = "r";
     }
   }
+  if (diagonal === true) {
+    if (y + 1 !== 0 && y + 1 < COLS && visited[x + 1][y + 1] === false) {
+      if (
+        (seen[x + 1][y + 1] === true &&
+          distance[x + 1][y + 1] > distance[x][y] + 1.5) ||
+        seen[x + 1][y + 1] !== true
+      ) {
+        distance[x + 1][y + 1] = distance[x][y] + 1.5;
+        seen[x + 1][y + 1] = true;
+        dir[x + 1][y + 1] = "dr";
+      }
+    }
+    if (y + 1 !== 0 && y + 1 < COLS && visited[x + 1][y - 1] === false) {
+      if (
+        (seen[x + 1][y - 1] === true &&
+          distance[x + 1][y - 1] > distance[x][y] + 1.5) ||
+        seen[x + 1][y - 1] !== true
+      ) {
+        distance[x + 1][y - 1] = distance[x][y] + 1.5;
+        seen[x + 1][y - 1] = true;
+        dir[x + 1][y - 1] = "ur";
+      }
+    }
+    if (y + 1 !== 0 && y + 1 < COLS && visited[x - 1][y + 1] === false) {
+      if (
+        (seen[x - 1][y + 1] === true &&
+          distance[x - 1][y + 1] > distance[x][y] + 1.5) ||
+        seen[x - 1][y + 1] !== true
+      ) {
+        distance[x - 1][y + 1] = distance[x][y] + 1.5;
+        seen[x - 1][y + 1] = true;
+        dir[x - 1][y + 1] = "dl";
+      }
+    }
+    if (y + 1 !== 0 && y + 1 < COLS && visited[x - 1][y - 1] === false) {
+      if (
+        (seen[x - 1][y - 1] === true &&
+          distance[x - 1][y - 1] > distance[x][y] + 1.5) ||
+        seen[x - 1][y - 1] !== true
+      ) {
+        distance[x - 1][y - 1] = distance[x][y] + 1.5;
+        seen[x - 1][y - 1] = true;
+        dir[x - 1][y - 1] = "ul";
+      }
+    }
+  }
   visited[x][y] = true;
   if (!(x === startItem[0] && y === startItem[1])) {
     changeColour(x, y, "#A7BED3", "searched");

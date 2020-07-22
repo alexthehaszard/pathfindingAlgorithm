@@ -18,6 +18,8 @@ let movingEnd = false;
 let drawing = false;
 let removing = false;
 
+let diagonal = false;
+
 setup();
 
 function setup() {
@@ -83,6 +85,10 @@ function followPath(x, y) {
   if (x + 1 === startItem[0] && y === startItem[1]) return;
   if (x === startItem[0] && y + 1 === startItem[1]) return;
   if (x === startItem[0] && y - 1 === startItem[1]) return;
+  if (x - 1 === startItem[0] && y + 1 === startItem[1]) return;
+  if (x + 1 === startItem[0] && y + 1 === startItem[1]) return;
+  if (x - 1 === startItem[0] && y - 1 === startItem[1]) return;
+  if (x + 1 === startItem[0] && y - 1 === startItem[1]) return;
 
   if (dir[x][y] === "d") {
     if (x + 1 === startItem[0] && y === startItem[1]) return;
@@ -110,6 +116,35 @@ function followPath(x, y) {
     changeColour(x, y + 1, "#FFCAAF", "final-path");
     setTimeout(function () {
       followPath(x, y + 1);
+    }, 10);
+  }
+
+  if (dir[x][y] === "dl") {
+    if (x + 1 === startItem[0] && y - 1 === startItem[1]) return;
+    changeColour(x + 1, y - 1, "#FFCAAF", "final-path");
+    setTimeout(function () {
+      followPath(x + 1, y - 1);
+    }, 10);
+  }
+  if (dir[x][y] === "ur") {
+    if (x - 1 === startItem[0] && y + 1 === startItem[1]) return;
+    changeColour(x - 1, y + 1, "#FFCAAF", "final-path");
+    setTimeout(function () {
+      followPath(x - 1, y + 1);
+    }, 10);
+  }
+  if (dir[x][y] === "dr") {
+    if (x + 1 === startItem[0] && y - 1 === startItem[1]) return;
+    changeColour(x - 1, y - 1, "#FFCAAF", "final-path");
+    setTimeout(function () {
+      followPath(x - 1, y - 1);
+    }, 10);
+  }
+  if (dir[x][y] === "ul") {
+    if (x + 1 === startItem[0] && y + 1 === startItem[1]) return;
+    changeColour(x + 1, y + 1, "#FFCAAF", "final-path");
+    setTimeout(function () {
+      followPath(x + 1, y + 1);
     }, 10);
   }
 }
