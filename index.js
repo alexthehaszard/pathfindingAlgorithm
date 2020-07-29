@@ -85,10 +85,14 @@ function followPath(x, y) {
   if (x + 1 === startItem[0] && y === startItem[1]) return;
   if (x === startItem[0] && y + 1 === startItem[1]) return;
   if (x === startItem[0] && y - 1 === startItem[1]) return;
-  if (x - 1 === startItem[0] && y + 1 === startItem[1]) return;
-  if (x + 1 === startItem[0] && y + 1 === startItem[1]) return;
-  if (x - 1 === startItem[0] && y - 1 === startItem[1]) return;
-  if (x + 1 === startItem[0] && y - 1 === startItem[1]) return;
+  if (x - 1 === startItem[0] && y + 1 === startItem[1] && diagonal === true)
+    return;
+  if (x + 1 === startItem[0] && y + 1 === startItem[1] && diagonal === true)
+    return;
+  if (x - 1 === startItem[0] && y - 1 === startItem[1] && diagonal === true)
+    return;
+  if (x + 1 === startItem[0] && y - 1 === startItem[1] && diagonal === true)
+    return;
 
   if (dir[x][y] === "d") {
     if (x + 1 === startItem[0] && y === startItem[1]) return;
