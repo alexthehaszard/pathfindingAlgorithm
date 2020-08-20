@@ -1,6 +1,12 @@
 const COLS = 50;
 const ROWS = 30;
-const WIDTH = 20;
+
+// setup the sizing of the boxes
+let width = (window.innerWidth * 0.8) / COLS;
+
+if (width * ROWS > window.innerHeight * 0.7) {
+  width = (window.innerHeight * 0.7) / ROWS;
+}
 
 let startItem = [5, 5];
 let endItem = [24, 44];
@@ -39,7 +45,7 @@ function setup() {
       grid[i][j].classList = "gridItem";
       grid[i][
         j
-      ].style = `background-color: white; height: ${WIDTH}px; width: ${WIDTH}px`;
+      ].style = `background-color: white; height: ${width}px; width: ${width}px`;
       grid[i][j].setAttribute(
         "onclick",
         `if (visited[${i}][${j}] === true && drawing === false) removing = true; else if (drawing === true) drawing = false; else drawing = true; moveNode(${i}, ${j})`
@@ -48,7 +54,7 @@ function setup() {
       if (i === startItem[0] && j === startItem[1]) {
         grid[i][
           j
-        ].style = `background-color: #41658A; height: ${WIDTH}px; width: ${WIDTH}px`;
+        ].style = `background-color: #41658A; height: ${width}px; width: ${width}px`;
         distance[i][j] = 0;
         grid[i][j].setAttribute(
           "onclick",
@@ -58,7 +64,7 @@ function setup() {
       } else if (i === endItem[0] && j === endItem[1]) {
         grid[i][
           j
-        ].style = `background-color: #FA8334; height: ${WIDTH}px; width: ${WIDTH}px`;
+        ].style = `background-color: #FA8334; height: ${width}px; width: ${width}px`;
         grid[i][j].setAttribute(
           "onclick",
           `if(movingEnd === true) movingEnd = false; else movingEnd = true`
@@ -76,7 +82,7 @@ function setup() {
 function changeColour(i, j, color, animation) {
   grid[i][
     j
-  ].style = `animation: ${animation} 500ms ease; background-color: ${color}; height: ${WIDTH}px; width: ${WIDTH}px`;
+  ].style = `animation: ${animation} 500ms ease; background-color: ${color}; height: ${width}px; width: ${width}px`;
 }
 
 function followPath(x, y) {
